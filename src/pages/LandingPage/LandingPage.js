@@ -62,20 +62,27 @@ const LandingPage = () => {
   }, []);
 
   const generateHandler = () => {
-    const data = {
-      template_id: response.data.memes[index].id,
-      username: "shubhamsinha",
-      password: "ImgFlip@123",
-      text0: text0,
-      text1: text1,
+    let myHeaders = new Headers();
+    myHeaders.append("Cookie", "claim_key=t8I5rmSrxJjKYPyT7SZG7WpkmQfAqriO");
+
+    var formdata = new FormData();
+    formdata.append("username", "shubhamsinha");
+    formdata.append("password", "ImgFlip@123");
+    formdata.append("template_id", response.data.memes[index].id);
+    formdata.append("text0", text0);
+    formdata.append("text1", text1);
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: formdata,
+      redirect: "follow",
     };
-    let res = axios.post("https://api.imgflip.com/caption_image", data);
-    if (res.status === 200) {
-      console.log(res.data, "sent data");
-      if (res.data !== null) {
-        setUrl(res.data.url);
-      }
-    }
+
+    fetch("https://api.imgflip.com/caption_image", requestOptions)
+      .then((response) => response.text())
+      .then((result) => setUrl(JSON.parse(result).data.url))
+      .catch((error) => console.log("error", error));
   };
 
   const fetchHandler = () => {

@@ -21,7 +21,9 @@ const TextBoxes = ({ text0, text1, setText0, setText1 }) => {
           label="Top Text"
           variant="outlined"
           value={text0}
-          onChange={(e) => setText0(e)}
+          onChange={(e) => {
+            setText0(e);
+          }}
         />
         <TextField
           id="outlined-basic"
