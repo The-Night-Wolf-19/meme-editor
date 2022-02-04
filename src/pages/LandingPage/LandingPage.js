@@ -7,7 +7,10 @@ import axios from "axios";
 import * as image1 from "../../asset/dog.json";
 import * as image3 from "../../asset/cat.json";
 import * as image2 from "../../asset/coffin.json";
+import * as image4 from "../../asset/puppet.json";
 import Lottie from "react-lottie";
+import { saveAs } from "file-saver";
+
 const LandingPage = () => {
   const img1 = {
     loop: true,
@@ -29,6 +32,14 @@ const LandingPage = () => {
     loop: true,
     autoplay: true,
     animationData: image3.default,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid",
+    },
+  };
+  const img4 = {
+    loop: true,
+    autoplay: true,
+    animationData: image4.default,
     rendererSettings: {
       preserveAspectRatio: "xMidYMid",
     },
@@ -87,8 +98,13 @@ const LandingPage = () => {
 
   const fetchHandler = () => {
     setUrl(null);
+    setText0("");
+    setText1("");
     let d = new Date();
     setIndex(Number(d.getTime()) % 100);
+  };
+  const downloadImage = () => {
+    saveAs(url == null ? response.data.memes[index].url : url, "image.jpg");
   };
 
   return (
@@ -105,6 +121,14 @@ const LandingPage = () => {
           <GenerateBtn
             generateHandler={() => generateHandler()}
             fetchHandler={() => fetchHandler()}
+            downloadHandler={() => downloadImage()}
+            url={
+              response == null
+                ? null
+                : url == null
+                ? response?.data?.memes[index]?.url
+                : url
+            }
           />
         </div>
         <div className="imagePane">
@@ -125,6 +149,7 @@ const LandingPage = () => {
               <Lottie options={img3} height={200} />
             </div>
             <div className="gif2">
+              <Lottie options={img4} height={250} />
               <Lottie options={img2} height={250} />
             </div>
           </div>

@@ -44,4 +44,8 @@
 }
 .gif2 {
   align-self: end;
+  display: flex;
+  min-width: inherit;
+  flex-direction: row;
+  justify-content: space-around;
 }
