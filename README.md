@@ -1,3 +1,10 @@
+# Meme Generator Project
+The project takes a meme template from an API and asks user to input top and bottom text that is to be inserted in the template.
+It also has functionality to share on various social media platforms.
+
+The project is hosted at [Meme Generator](https://meme-generator-tnw19.netlify.app/).
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
